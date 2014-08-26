@@ -1,0 +1,21 @@
+Description:
+    Generator Pontiac files.
+
+Example:
+    rails generate pontiac client_id client_secret
+
+    This will remove:
+        app/assets/javascripts/application.js
+        app/assets/stylesheets/application_helpern.css
+        app/views/layouts/application.html.erb
+        public/index.html
+
+    This will create:
+        app/assets/javascripts/application.js.coffee
+        app/assets/stylesheets/application_helpernon.css.less.erb
+        app/controllers/home_controller.rb
+        app/helpers/home_helper.rb
+        app/views/home/
+        app/views/layouts/application.html.haml
+        config/app_secret_config.yml
+        db/migrate/create_shops.rb

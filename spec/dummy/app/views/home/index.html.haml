@@ -1,0 +1,37 @@
+.content
+  %h2 Заказы
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Номер заказа
+        %th Клиент
+        %th Статус оплаты
+        %th Статус доставки
+        %th Сумма
+    %tbody
+      -@orders.each do |order|
+        %tr
+          %td=link_to order['name'], "#{shop_url}/admin/orders/#{order['id']}", target: :_blank
+          %td=order['customer']['name']
+          %td
+            %span.label(class="#{financial_class(order['financial_status'])}")
+              =order['financial_status_name']
+          %td
+            %span.label(class="#{fulfillment_class(order['fulfillment_status'])}")
+              =order['fulfillment_status_name']
+          %td=order['total_price']
+
+  %h2 Товары
+  #product-accordion.accordion
+    -@products.each do |product|
+      .accordion-group
+        .accordion-heading
+          %a.accordion-toggle{href: "#product-#{product['id']}", data: {toggle: 'collapse', parent: '#product-accordion'}}
+            =product['title']
+        %div.accordion-body.collapse(id="product-#{product['id']}")
+          .accordion-inner
+            %p==Тип товара: #{product['product_type']}
+            %p==Производитель: #{product['vendor']}
+            =raw product['body_html']
+            %br/
+            %p=link_to "Изменить этот товар", "#{shop_url}/admin/products/#{product['id']}", class: 'btn btn-primary', target: :_blank
